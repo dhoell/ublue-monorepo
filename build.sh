@@ -14,6 +14,15 @@ else
     NVIDIA_PACKAGE_NAME="nvidia-${NVIDIA_MAJOR_VERSION}xx"
 fi
 
+#enable rpm fusion
+wget -P /tmp/rpms \
+    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
+
+rpm-ostree install \
+    /tmp/rpms/*.rpm \
+    fedora-repos-archive
+
 #Is it possible to build all driver versions on the same iamge?
 rpm-ostree install \
     akmod-${NVIDIA_PACKAGE_NAME}*:${NVIDIA_MAJOR_VERSION}.*.fc${RELEASE} \
