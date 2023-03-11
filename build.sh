@@ -2,8 +2,6 @@
 
 set -oeux pipefail
 
-RELEASE="$(rpm -E '%fedora.%_arch')"
-
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular,updates-modular}.repo
 
 # nvidia 520.xxx and newer currently don't have a -$VERSIONxx suffix in their
@@ -14,7 +12,7 @@ else
     NVIDIA_PACKAGE_NAME="nvidia-${NVIDIA_MAJOR_VERSION}xx"
 fi
 
-RELEASE="$(rpm -E %fedora)"
+RELEASE="$(rpm -E '%fedora')"
 #enable rpm fusion
 wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
@@ -23,6 +21,8 @@ wget -P /tmp/rpms \
 rpm-ostree install \
     /tmp/rpms/*.rpm \
     fedora-repos-archive
+    
+RELEASE="$(rpm -E '%fedora.%_arch')"
 
 #Is it possible to build all driver versions on the same iamge?
 rpm-ostree install \
