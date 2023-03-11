@@ -14,6 +14,7 @@ else
     NVIDIA_PACKAGE_NAME="nvidia-${NVIDIA_MAJOR_VERSION}xx"
 fi
 
+RELEASE="$(rpm -E %fedora)"
 #enable rpm fusion
 wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
