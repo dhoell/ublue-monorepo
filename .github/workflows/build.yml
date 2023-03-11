@@ -20,7 +20,7 @@ env:
 
 jobs:
   build-akmods:
-    name: Build akmods package
+    name: Build and push akmods (nvidia+v42loopback) image
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -38,8 +38,6 @@ jobs:
             major_version: 38
           - driver_version: 525
             major_version: 38
-          - driver_version: 520
-            major_version: 37
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
@@ -105,7 +103,7 @@ jobs:
             ${{ env.IMAGE_NAME }}
           labels: |
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
-            org.opencontainers.image.description=ublue-os ${{ env.IMAGE_NAME }} with akmods-nvidia packages pre-built
+            org.opencontainers.image.description=ublue-os ${{ env.IMAGE_NAME }} as akmod build cache
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
             io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/1728152?s=200&v=4
       # Build image using Buildah action
@@ -180,7 +178,7 @@ jobs:
           echo "${{ toJSON(steps.push.outputs) }}"
 
   build-main:
-    name: Build and push image
+    name: Build and push main image
     needs: build-akmods
     runs-on: ubuntu-22.04
     permissions:
@@ -344,7 +342,7 @@ jobs:
           echo "${{ toJSON(steps.push.outputs) }}"
 
   build-nvidia:
-    name: Build and push image
+    name: Build and push nvidia image
     needs: build-main
     runs-on: ubuntu-22.04
     permissions:
@@ -364,20 +362,20 @@ jobs:
           - major_version: 37
             is_latest_version: true
             is_stable_version: true
-          - major_version: 38
-            is_latest_version: true
-            is_stable_version: false
-          - driver_version: 525
-            is_latest_driver: true
-        exclude:
-          # There is no Fedora 37 version of sericea
-          # When F38 is added, sericea will automatically be built too
-          - image_name: sericea
-            major_version: 37
-          - driver_version: 520
-            major_version: 38
-          - driver_version: 470
-            major_version: 38
+        #  - major_version: 38
+        #    is_latest_version: true
+        #    is_stable_version: false
+        #  - driver_version: 525
+        #    is_latest_driver: true
+       # exclude:
+       #   # There is no Fedora 37 version of sericea
+       #   # When F38 is added, sericea will automatically be built too
+       #   - image_name: sericea
+       #     major_version: 37
+       #   - driver_version: 520
+       #     major_version: 38
+       #   - driver_version: 470
+       #     major_version: 38
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
@@ -386,7 +384,7 @@ jobs:
       - name: Matrix Variables
         run: |
             REPO=${{ github.repository }}
-            echo "IMAGE_NAME=${{ matrix.image_name }}-${REPO##*/}" >> $GITHUB_ENV
+            echo "IMAGE_NAME=${{ matrix.image_name }}-nvidia" >> $GITHUB_ENV
       - name: Generate tags
         id: generate-tags
         shell: bash
