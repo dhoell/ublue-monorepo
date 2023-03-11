@@ -36,6 +36,8 @@ jobs:
             major_version: 38
           - driver_version: 470
             major_version: 38
+          - driver_version: 525
+            major_version: 38
           - driver_version: 520
             major_version: 37
     steps:
