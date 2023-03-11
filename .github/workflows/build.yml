@@ -188,14 +188,14 @@ jobs:
       matrix:
         image_name: [silverblue,kinoite] #[silverblue, kinoite, vauxite, sericea, base, lxqt, mate]
         major_version: [37] #[37, 38]
-        include:
+        #include:
         # - major_version: 37
         #   is_latest_version: true
         #   is_stable_version: true
         # - major_version: 38
         #   is_latest_version: true
         #   is_stable_version: false
-        exclude:
+        #exclude:
           # There is no Fedora 37 version of sericea
           # When F38 is added, sericea will automatically be built too
         # - image_name: sericea
