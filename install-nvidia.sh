@@ -7,7 +7,7 @@ sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular
 install -D /tmp/ublue-os-nvidia-addons/rpmbuild/SOURCES/nvidia-container-runtime.repo \
     /etc/yum.repos.d/nvidia-container-runtime.repo
 
-source /var/cache/akmods/nvidia-vars
+source /var/cache/akmods/akmod-vars
 
 rpm-ostree install \
     xorg-x11-drv-${NVIDIA_PACKAGE_NAME}-{,cuda-,devel-,kmodsrc-,power-}${NVIDIA_FULL_VERSION} \
