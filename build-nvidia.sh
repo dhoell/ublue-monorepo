@@ -19,11 +19,11 @@ wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
-RELEASE="$(rpm -E '%fedora.%_arch')"
-
 rpm-ostree install \
     /tmp/rpms/*.rpm \
     fedora-repos-archive
+    
+RELEASE="$(rpm -E '%fedora.%_arch')"
 
 rpm-ostree install \
     akmod-${NVIDIA_PACKAGE_NAME}*:${NVIDIA_MAJOR_VERSION}.*.fc${RELEASE} \
