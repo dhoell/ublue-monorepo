@@ -509,13 +509,13 @@ jobs:
         image_name: [silverblue,base] #[silverblue, kinoite, vauxite, sericea, base, lxqt, mate]
         major_version: [37] #[37, 38]
         include:
-        # - major_version: 37
-        #   is_latest_version: true
-        #   is_stable_version: true
+         - major_version: 37
+           is_latest_version: true
+           is_stable_version: true
         # - major_version: 38
         #   is_latest_version: true
         #   is_stable_version: false
-        exclude:
+        #exclude:
           # There is no Fedora 37 version of sericea
           # When F38 is added, sericea will automatically be built too
         # - image_name: sericea
@@ -677,15 +677,15 @@ jobs:
         # - major_version: 36
         #   is_latest_version: false
         #   is_stable_version: true
-        # - major_version: 37
-        #   is_latest_version: true
-        #   is_stable_version: true
+         - major_version: 37
+           is_latest_version: true
+           is_stable_version: true
         # - major_version: 38
         #   is_latest_version: true
         #   is_stable_version: false
-        # - driver_version: 525
-        #   is_latest_driver: true
-        exclude:
+         - driver_version: 525
+           is_latest_driver: true
+        #exclude:
        #   # There is no Fedora 37 version of sericea
        #   # When F38 is added, sericea will automatically be built too
        #   - image_name: sericea
