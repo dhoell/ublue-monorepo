@@ -661,7 +661,8 @@ jobs:
 
   build-nvidia:
     name: Build and push image
-    needs: build-extended, build-nvidia-akmod
+    needs: build-extended
+    needs: build-nvidia-akmod
     runs-on: ubuntu-22.04
     permissions:
       contents: read
