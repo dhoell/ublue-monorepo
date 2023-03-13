@@ -2,7 +2,7 @@
 
 set -oeux pipefail
 
-RELEASE="$(rpm -E '%fedora.%_arch')"
+RELEASE="$(rpm -E '%fedora')"
 
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular,updates-modular}.repo
 
