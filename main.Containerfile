@@ -10,16 +10,8 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 ARG IMAGE_NAME="${IMAGE_NAME}"
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
 
-<<<<<<< HEAD
 ADD main-install.sh /tmp/main-install.sh
 ADD main-post-install.sh /tmp/main-post-install.sh
-=======
-COPY --from=${AKMODS_CACHE}:${AKMODS_VERSION}-525 / .
-
-ADD install-main.sh /tmp/install-main.sh
-ADD install-akmods.sh /tmp/install-akmods.sh
-ADD post-install-main.sh /tmp/post-install-main.sh
->>>>>>> main
 ADD packages.json /tmp/packages.json
 
 COPY --from=ghcr.io/ublue-os/config:latest /rpms /tmp/rpms
