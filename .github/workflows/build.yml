@@ -286,7 +286,7 @@ jobs:
           tags: |
             ${{ steps.generate-tags.outputs.alias_tags }}
           build-args: |
-            IMAGE_NAME=base
+            IMAGE_NAME=base-main
             FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
             NVIDIA_MAJOR_VERSION=${{ matrix.driver_version }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -437,7 +437,7 @@ jobs:
           tags: |
             ${{ steps.generate-tags.outputs.alias_tags }}
           build-args: |
-            IMAGE_NAME=base
+            IMAGE_NAME=base-main
             FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
@@ -529,9 +529,9 @@ jobs:
       - name: Matrix Variables
         run: |
           if [[ "${{ matrix.image_name }}" == "lxqt" || "${{ matrix.image_name }}" == "mate" ]]; then
-              echo "SOURCE_IMAGE=base" >> $GITHUB_ENV
+              echo "SOURCE_IMAGE=base-main" >> $GITHUB_ENV
           else
-              echo "SOURCE_IMAGE=${{ matrix.image_name }}" >> $GITHUB_ENV
+              echo "SOURCE_IMAGE=${{ format('{0}-{1}', matrix.image_name, env.IMAGE_BASE_NAME) }}" >> $GITHUB_ENV
           fi
           echo "IMAGE_NAME=${{ format('{0}-{1}', matrix.image_name, env.IMAGE_AKMODS_NAME) }}" >> $GITHUB_ENV
 
