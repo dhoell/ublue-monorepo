@@ -182,7 +182,7 @@ jobs:
         run: |
           echo "${{ toJSON(steps.push.outputs) }}"
 
-  build-nvidia:
+  build-nvidia-akmod:
     name: Build nvidia
     needs: build-main
     runs-on: ubuntu-22.04
@@ -345,7 +345,7 @@ jobs:
         run: |
           echo "${{ toJSON(steps.push.outputs) }}"
 
-  build-v4l2loopback:
+  build-v4l2loopback-akmod:
     name: Build v4l2loopback
     needs: build-main
     runs-on: ubuntu-22.04
@@ -497,7 +497,7 @@ jobs:
 
   build-extended:
     name: main with akmods
-    needs: build-cache
+    needs: build-v4l2loopback-akmod
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -661,7 +661,7 @@ jobs:
 
   build-nvidia:
     name: Build and push image
-    needs: build-extended, build-nvidia
+    needs: build-extended, build-nvidia-akmod
     runs-on: ubuntu-22.04
     permissions:
       contents: read
