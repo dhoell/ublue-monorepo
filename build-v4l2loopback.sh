@@ -2,7 +2,7 @@
 
 set -oeux pipefail
 
-RELEASE="$(rpm -E '%fedora.%_arch')"
+RELEASE="$(rpm -E '%fedora')"
 
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular,updates-modular}.repo
 
@@ -10,6 +10,8 @@ sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular
 wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
+
+RELEASE="$(rpm -E '%fedora.%_arch')"
 
 rpm-ostree install \
     /tmp/rpms/*.rpm \
