@@ -2,7 +2,7 @@
 
 set -oeux pipefail
 
-RELEASE="$(rpm -E '%fedora')"
+RELEASE="$(rpm -E '%fedora.%_arch')"
 
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-{cisco-openh264,modular,updates-modular}.repo
 
@@ -13,17 +13,6 @@ if [[ "${NVIDIA_MAJOR_VERSION}" -ge 520 ]]; then
 else
     NVIDIA_PACKAGE_NAME="nvidia-${NVIDIA_MAJOR_VERSION}xx"
 fi
-
-#enable rpm fusion
-wget -P /tmp/rpms \
-    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
-    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
-
-RELEASE="$(rpm -E '%fedora.%_arch')"
-
-rpm-ostree install \
-    /tmp/rpms/*.rpm \
-    fedora-repos-archive
 
 rpm-ostree install \
     akmod-${NVIDIA_PACKAGE_NAME}*:${NVIDIA_MAJOR_VERSION}.*.fc${RELEASE} \
