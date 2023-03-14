@@ -680,7 +680,7 @@ jobs:
            is_stable_version: false
          - driver_version: 525
            is_latest_driver: true
-        #exclude:
+        exclude:
           # There is no Fedora 37 version of sericea
           # When F38 is added, sericea will automatically be built too
           - image_name: sericea
