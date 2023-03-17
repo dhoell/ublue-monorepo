@@ -33,7 +33,15 @@ akmods --force --kernels "${KERNEL_VERSION}" --kmod "v4l2loopback"
 modinfo /usr/lib/modules/${KERNEL_VERSION}/extra/v4l2loopback/v4l2loopback.ko.xz > /dev/null || \
 (cat /var/cache/akmods/v4l2loopback/${LOOPBACK_AKMOD_VERSION}-for-${KERNEL_VERSION}.failed.log && exit 1)
 
-cat <<EOF > /var/cache/akmods/akmod-v4l2loopback-vars
+install -D /etc/pki/akmods/certs/public_key.der /tmp/ublue-os-akmods-key/rpmbuild/SOURCES/public_key.der
+
+rpmbuild -ba \
+    --define '_topdir /tmp/ublue-os-akmods-key/rpmbuild' \
+    --define '%_tmppath %{_topdir}/tmp' \
+    /tmp/ublue-os-akmods-key/ublue-os-akmods-key.spec
+
+
+cat <<EOF > /var/cache/akmods/akmod-vars
 KERNEL_VERSION=${KERNEL_VERSION}
 RELEASE=${RELEASE}
 LOOPBACK_AKMOD_VERSION=${LOOPBACK_AKMOD_VERSION}

@@ -9,6 +9,8 @@ ARG NVIDIA_MAJOR_VERSION="${NVIDIA_MAJOR_VERSION:-525}"
 
 COPY --from=ghcr.io/ublue-os/config:latest /build /tmp/build
 COPY justfile /tmp/build/ublue-os-just/justfile
+COPY justfile-nvidia /tmp/build/ublue-os-just/justfile-nvidia
+RUN cat /tmp/build/ublue-os-just/justfile-nvidia >> /tmp/build/ublue-os-just/justfile
 COPY build-nvidia.sh /tmp/build-nvidia.sh
 
 ADD certs /tmp/certs

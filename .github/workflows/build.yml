@@ -426,7 +426,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./build-v4l2loopback.Containerfile
+            ./build-others.Containerfile
           image: ${{ env.IMAGE_NAME }}
           tags: |
             ${{ steps.generate-tags.outputs.alias_tags }}
