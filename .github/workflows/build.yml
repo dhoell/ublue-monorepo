@@ -340,7 +340,7 @@ jobs:
         run: |
           echo "${{ toJSON(steps.push.outputs) }}"
 
-  build-other-akmod:
+  build-others-akmod:
     name: Build others
     needs: build-main
     runs-on: ubuntu-22.04
@@ -492,7 +492,7 @@ jobs:
 
   build-extended:
     name: main with akmods
-    needs: build-v4l2loopback-akmod
+    needs: build-others-akmod
     runs-on: ubuntu-22.04
     permissions:
       contents: read
