@@ -21,7 +21,7 @@ env:
 
 jobs:
   build-main:
-    name: Build and push main image
+    name: Build main
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -340,8 +340,8 @@ jobs:
         run: |
           echo "${{ toJSON(steps.push.outputs) }}"
 
-  build-v4l2loopback-akmod:
-    name: Build v4l2loopback
+  build-other-akmod:
+    name: Build others
     needs: build-main
     runs-on: ubuntu-22.04
     permissions:
@@ -360,7 +360,7 @@ jobs:
       - name: Matrix Variables
         run: |
             REPO=${{ github.repository }}
-            echo "IMAGE_NAME=ublue-akmod-v4l2loopback" >> $GITHUB_ENV
+            echo "IMAGE_NAME=ublue-akmod-others" >> $GITHUB_ENV
       - name: Generate tags
         id: generate-tags
         shell: bash
@@ -655,7 +655,7 @@ jobs:
           echo "${{ toJSON(steps.push.outputs) }}"
 
   build-nvidia:
-    name: Build and push image
+    name: extended with nvidia
     needs: [build-extended, build-nvidia-akmod]
     runs-on: ubuntu-22.04
     permissions:
