@@ -7,10 +7,10 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION} AS builder
 
 ARG IMAGE_NAME="${IMAGE_NAME}"
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION}"
-ARG AKMOD_V4L2LOOPBACK="ghcr.io/dhoell/ublue-akmod-v4l2loopback"
+ARG AKMOD_OTHERS="ghcr.io/dhoell/ublue-akmod-others"
 ARG AKMODS_VERSION="${FEDORA_MAJOR_VERSION}"
 
-COPY --from=${AKMOD_V4L2LOOPBACK}:${AKMODS_VERSION} / .
+COPY --from=${AKMOD_OTHERS}:${AKMODS_VERSION} / .
 
 ADD extended-install.sh /tmp/extended-install.sh
 
