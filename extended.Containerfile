@@ -12,8 +12,8 @@ ARG AKMODS_VERSION="${FEDORA_MAJOR_VERSION}"
 
 COPY --from=${AKMOD_OTHERS}:${AKMODS_VERSION} / .
 
-ADD justfile /tmp/justfile-akmods
-RUN cat /tmp/justfile-akmods >> /usr/share/ublue-os-just/justfile
+ADD justfile-akmods /tmp/justfile-akmods
+RUN cat /tmp/justfile-akmods >> /usr/share/ublue-os/ublue-os-just/justfile
 
 ADD extended-install.sh /tmp/extended-install.sh
 
