@@ -30,5 +30,4 @@ RUN /tmp/build-nvidia.sh
 FROM scratch
 
 COPY --from=builder /var/cache /var/cache
-COPY --from=builder /tmp/ublue-os /tmp/ublue-os
 COPY --from=builder /tmp/ublue-os-nvidia-addons /tmp/ublue-os-nvidia-addons

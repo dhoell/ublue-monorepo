@@ -10,8 +10,6 @@ rpm-ostree install \
     akmod-v4l2loopback-*.fc${RELEASE} \
     mock
 
-/tmp/build/ublue-os-just/build.sh
-
 # alternatives cannot create symlinks on its own during a container build
 ln -s /usr/bin/ld.bfd /etc/alternatives/ld && ln -s /etc/alternatives/ld /usr/bin/ld
 
