@@ -11,6 +11,9 @@ ARG NVIDIA_MAJOR_VERSION="${NVIDIA_MAJOR_VERSION}"
 
 COPY --from=${AKMODS_NVIDIA}:${AKMODS_VERSION}-${NVIDIA_MAJOR_VERSION} / .
 
+COPY justfile-nvidia /tmp/justfile-nvidia
+RUN cat /tmp/justfile-nvidia >> /usr/share/ublue-os-just/justfile
+
 COPY nvidia-install.sh /tmp/nvidia-install.sh
 COPY nvidia-post-install.sh /tmp/nvidia-post-install.sh
 RUN /tmp/nvidia-install.sh
