@@ -5,8 +5,6 @@ ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-37}"
 
 FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION} AS builder
 
-COPY --from=ghcr.io/ublue-os/config:latest /build /tmp/build
-COPY justfile /tmp/build/ublue-os-just/justfile
 COPY build-others.sh /tmp/build-others.sh
 
 ADD certs /tmp/certs
@@ -18,5 +16,4 @@ RUN /tmp/build-others.sh
 FROM scratch
 
 COPY --from=builder /var/cache /var/cache
-COPY --from=builder /tmp/ublue-os /tmp/ublue-os
 COPY --from=builder /tmp/ublue-os-akmods-key /tmp/ublue-os-akmods-key
