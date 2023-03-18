@@ -15,6 +15,7 @@ ADD main-post-install.sh /tmp/main-post-install.sh
 ADD packages.json /tmp/packages.json
 
 COPY --from=ghcr.io/ublue-os/config:latest /rpms /tmp/rpms
+COPY --from=ghcr.io/ublue-os/config:latest /build /tmp/build
 
 RUN /tmp/main-install.sh
 RUN /tmp/main-post-install.sh
